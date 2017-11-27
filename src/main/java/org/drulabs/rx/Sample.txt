@@ -1,0 +1,23 @@
+        UserManager userManager = getUserManager();
+        userManager.setName("John", new UserManager.Listener() {
+            @Override
+            public void success(User user) {
+                userManager.setAge(30, new UserManager.Listener() {
+                    @Override
+                    public void success(User user) {
+                        runOnUiThread(new Runnable() {
+                            @override
+                            public void run() {
+                                if(!isDestroyed()){
+                                    textView.setText(user.getName());
+                                }
+                            }
+                        });
+                    }
+                    @Override
+                    public void failure(Throwable throwable) {}
+                });
+            }
+            @Override
+            public void failure(Throwable throwable) {}
+        });
